@@ -12,8 +12,8 @@ Rails.application.routes.draw do
         post   'third-party-login', to: 'sessions#third_party_login', as: 'third_party_login'
         # /api/v1/user/logout
         delete 'logout',            to: 'sessions#logout',            as: 'logout'
-        # /api/v1/user/sign_up
-        post   'signup',            to: 'registrations#sign_up',      as: 'sign_up'
+        # /api/v1/user/signup
+        post   'signup',            to: 'registrations#signup',       as: 'signup'
       end
     end
   end

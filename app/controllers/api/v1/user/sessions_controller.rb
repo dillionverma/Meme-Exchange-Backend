@@ -9,7 +9,7 @@ class Api::V1::User::SessionsController < Api::V1::User::AuthenticatedController
   #
   # POST /api/v1/user/login
   def login
-    user = User.find_by(email: @email)
+    user = ::User.find_by(email: @email)
     if user.nil?
       render_error(
         status: :unauthorized,
@@ -19,27 +19,13 @@ class Api::V1::User::SessionsController < Api::V1::User::AuthenticatedController
       )
     elsif user.valid_password?(@password)
       render status: :ok,
-             json: { token: encoded_token(user_token: user.token) }
+             json: { token: encoded_token(user_token: user.id) }
     else
       render_error(
         status: :unauthorized,
         code: '401',
         title: 'Invalid password',
         detail: 'password'
-      )
-    end
-  end
-
-  # GET /api/v1/user/authenticate
-  def authenticate_user
-    if current_user.present?
-      respond_with current_user
-    else
-      render_error(
-        status: :unauthorized,
-        code: '401',
-        title: 'Unable to authorize',
-        detail: 'Unable to authorize'
       )
     end
   end
