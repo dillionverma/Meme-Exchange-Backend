@@ -13,7 +13,7 @@ class Api::V1::User::RegistrationsController < Api::V1::User::AuthenticatedContr
     if user.valid?
       user.save!
       render status: :ok,
-        json: { token: encoded_token(user_token: user.id) }
+        json: { token: encoded_token(user_id: user.id) }
     else
       render_validation_errors(user)
     end

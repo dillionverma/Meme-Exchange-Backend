@@ -19,7 +19,7 @@ class Api::V1::User::SessionsController < Api::V1::User::AuthenticatedController
       )
     elsif user.valid_password?(@password)
       render status: :ok,
-             json: { token: encoded_token(user_token: user.id) }
+             json: { token: encoded_token(user_id: user.id) }
     else
       render_error(
         status: :unauthorized,

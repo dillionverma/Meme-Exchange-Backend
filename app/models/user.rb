@@ -27,7 +27,7 @@ class User < ApplicationRecord
 
   def jwt_token
     return unless Rails.env.development? || Rails.env.test?
-    JWT.encode({ user_token: id }, Rails.application.secrets.secret_key_base, 'HS256', {})
+    JWT.encode({ user_id: id }, Rails.application.secrets.secret_key_base, 'HS256', {})
   end
 
 end
