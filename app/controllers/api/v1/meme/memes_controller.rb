@@ -18,15 +18,17 @@ class Api::V1::Meme::MemesController < Api::V1::AuthenticatedController
   private
 
   def create_buy_transaction(quantity)
-    Transaction.create!(user: current_user, meme: meme, quantity: quantity, transaction_type: 'buy')
+    Transaction.create!(user: current_user, meme: meme, quantity: quantity, 
+                        price: meme.price, transaction_type: 'buy')
   end
 
   def create_sell_transaction(quantity)
-    Transaction.create!(user: current_user, meme: meme, quantity: quantity, transaction_type: 'sell')
+    Transaction.create!(user: current_user, meme: meme, quantity: quantity, 
+                        price: meme.price, transaction_type: 'sell')
   end
 
   def meme
-    @meme ||= Meme.find_by(reddit_id: params.fetch(:id))
+    @meme ||= ::Meme.find_by(reddit_id: params.fetch(:id))
   end
 
 end

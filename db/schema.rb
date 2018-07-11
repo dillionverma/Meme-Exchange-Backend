@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20180711160732) do
 
   create_table "transactions", force: :cascade do |t|
     t.string "transaction_type"
-    t.bigint "price"
+    t.bigint "price", default: 0
     t.bigint "quantity", default: 0
     t.bigint "user_id"
     t.bigint "meme_id"

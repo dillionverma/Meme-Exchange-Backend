@@ -20,6 +20,7 @@
 #
 
 class UserSerializer < ActiveModel::Serializer
-  attributes :id
   attribute :email
+  attribute :username
+  attribute :coins
 end

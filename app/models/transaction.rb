@@ -48,10 +48,10 @@ class Transaction < ApplicationRecord
   end
 
   def can_buy?
-    errors.add('user', 'does not have enough coins') if buy? && quantity*price > user.coins
+    errors.add('user', 'does not have enough coins to buy') if buy? && quantity*price > user.coins
   end
 
   def can_sell?
-    errors.add('user', 'does not have enough quantity') if sell? && quantity > meme.quantity
+    errors.add('user', 'does not have enough quantity to sell') if sell? && quantity > meme.quantity
   end
 end
