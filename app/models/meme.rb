@@ -28,4 +28,18 @@ class Meme < ApplicationRecord
 
   scope :active, -> { where("quantity!='0'") }
 
+
+  def self.from_reddit(reddit_id)
+    search_id = reddit_id
+    search_id = "t3_#{reddit_id}" if !reddit_id.starts_with?('t3')
+
+    m = Reddit.from_ids(search_id).to_ary[0]
+    Meme.new(title:     m.title,
+             author:    m.author.name,
+             reddit_id: reddit_id,
+             subreddit: m.subreddit.title,
+             price:     m.score,
+             url:       m.permalink)
+  end
+
 end

@@ -7,12 +7,12 @@ class Api::V1::Meme::MemesController < Api::V1::AuthenticatedController
 
   # /api/v1/meme/:id/buy
   def buy
-    respond_with create_buy_transaction(params[:quantity])
+    respond_with create_buy_transaction(params.fetch(:quantity))
   end
   
   # /api/v1/meme/:id/sell
   def sell
-    respond_with create_sell_transaction(params[:quantity])
+    respond_with create_sell_transaction(params.fetch(:quantity))
   end
 
   private
@@ -28,7 +28,7 @@ class Api::V1::Meme::MemesController < Api::V1::AuthenticatedController
   end
 
   def meme
-    @meme ||= ::Meme.find_by(reddit_id: params.fetch(:id))
+    @meme ||= ::Meme.find_by(reddit_id: params.fetch(:id)) || Meme.from_reddit(params.fetch(:id))
   end
 
 end
