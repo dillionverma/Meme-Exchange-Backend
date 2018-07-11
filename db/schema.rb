@@ -10,10 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326213216) do
+ActiveRecord::Schema.define(version: 20180711160732) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "memes", force: :cascade do |t|
+    t.string "title"
+    t.string "subreddit"
+    t.string "author"
+    t.text "url"
+    t.bigint "price"
+    t.bigint "quantity", default: 0
+    t.string "reddit_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.string "transaction_type"
+    t.datetime "buy_date"
+    t.bigint "buy_price"
+    t.bigint "buy_quantity", default: 0
+    t.datetime "sell_date"
+    t.bigint "sell_price"
+    t.bigint "sell_quantity", default: 0
+    t.bigint "user_id"
+    t.bigint "meme_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meme_id"], name: "index_transactions_on_meme_id"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,8 +56,12 @@ ActiveRecord::Schema.define(version: 20180326213216) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "coins"
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "transactions", "memes"
+  add_foreign_key "transactions", "users"
 end
