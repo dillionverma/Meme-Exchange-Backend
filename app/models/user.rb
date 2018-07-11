@@ -15,6 +15,8 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  coins                  :integer          default(1000)
+#  username               :string
 #
 
 class User < ApplicationRecord
@@ -24,6 +26,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
 
+  has_many :transactions
+  has_many :memes, through: :transactions
+
+  #VALID_USERNAME_REGEX = /\A[a-zA-Z0-9]+\z/
+  #validates :username, presence: { message: 'username must be given please' },
+                       #uniqueness: { case_sensitive: false },
+                       #length: { minimum: 3, maximum: 20 },
+                       #format: { without: VALID_USERNAME_REGEX, message: 'must contain only letters or numbers' }
 
   def jwt_token
     return unless Rails.env.development? || Rails.env.test?

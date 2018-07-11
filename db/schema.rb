@@ -29,12 +29,8 @@ ActiveRecord::Schema.define(version: 20180711160732) do
 
   create_table "transactions", force: :cascade do |t|
     t.string "transaction_type"
-    t.datetime "buy_date"
-    t.bigint "buy_price"
-    t.bigint "buy_quantity", default: 0
-    t.datetime "sell_date"
-    t.bigint "sell_price"
-    t.bigint "sell_quantity", default: 0
+    t.bigint "price"
+    t.bigint "quantity", default: 0
     t.bigint "user_id"
     t.bigint "meme_id"
     t.datetime "created_at", null: false
@@ -56,7 +52,7 @@ ActiveRecord::Schema.define(version: 20180711160732) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "coins"
+    t.bigint "coins", default: 1000
     t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

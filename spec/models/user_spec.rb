@@ -15,6 +15,8 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  coins                  :integer          default(1000)
+#  username               :string
 #
 
 require 'rails_helper'
