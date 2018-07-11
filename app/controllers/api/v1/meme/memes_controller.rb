@@ -7,7 +7,7 @@ class Api::V1::Meme::MemesController < Api::V1::AuthenticatedController
 
   # /api/v1/meme/:id/buy
   def buy
-    create_buy_transaction(params[:quantity])
+    respond_with create_buy_transaction(params[:quantity])
   end
   
   # /api/v1/meme/:id/sell
