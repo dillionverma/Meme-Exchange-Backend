@@ -17,7 +17,6 @@
 class Meme < ApplicationRecord
   has_many :transactions
   #has_many :meme_histories
-  #has_many :meme_portfolios
   has_many :users, through: :transactions
 
   #validates :title,     presence: true

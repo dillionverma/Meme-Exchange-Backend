@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       # =========================
       namespace :user do
         # /api/v1/user
-        get '/',                    to: 'user#show'
+        get    '/',                 to: 'user#show'
         # /api/v1/user/login
         post   'login',             to: 'sessions#login',             as: 'login'
         # /api/v1/user/third-party-login
@@ -14,6 +14,19 @@ Rails.application.routes.draw do
         delete 'logout',            to: 'sessions#logout',            as: 'logout'
         # /api/v1/user/signup
         post   'signup',            to: 'registrations#signup',       as: 'signup'
+      end
+
+      # USER ROUTES
+      # =========================
+      namespace :meme do
+
+        # /api/v1/meme/:id
+        get   '/:id',                    to: 'memes#show'
+        # /api/v1/meme/:id/buy
+        post  '/:id/buy',                to: 'memes#buy'
+        # /api/v1/meme/:id/sell
+        post  '/:id/sell',               to: 'memes#sell'
+
       end
     end
   end

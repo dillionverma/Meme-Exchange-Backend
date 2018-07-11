@@ -1,4 +1,4 @@
-class Api::V1::User::SessionsController < Api::V1::User::AuthenticatedController
+class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
   before_action :authenticate, except: :login
   before_action :set_login_params, only: [:login]
 

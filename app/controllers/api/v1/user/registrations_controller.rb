@@ -1,4 +1,4 @@
-class Api::V1::User::RegistrationsController < Api::V1::User::AuthenticatedController
+class Api::V1::User::RegistrationsController < Api::V1::AuthenticatedController
   before_action :authenticate, except: :signup
 
   # {

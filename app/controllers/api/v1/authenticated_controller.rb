@@ -1,4 +1,4 @@
-class Api::V1::User::AuthenticatedController < Api::BaseController
+class Api::V1::AuthenticatedController < Api::BaseController
   include ActionController::HttpAuthentication::Token::ControllerMethods
   before_action :authenticate
 
