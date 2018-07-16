@@ -4,7 +4,7 @@
 #
 #  id               :integer          not null, primary key
 #  transaction_type :string
-#  price            :integer
+#  price            :integer          default(0)
 #  quantity         :integer          default(0)
 #  user_id          :integer
 #  meme_id          :integer

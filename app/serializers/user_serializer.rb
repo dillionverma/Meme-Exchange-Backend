@@ -17,6 +17,7 @@
 #  updated_at             :datetime         not null
 #  coins                  :integer          default(1000)
 #  username               :string
+#  avatar                 :string
 #
 
 class UserSerializer < ActiveModel::Serializer

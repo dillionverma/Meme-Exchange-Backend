@@ -1,19 +1,18 @@
 # == Schema Information
 #
-# Table name: transactions
+# Table name: third_party_identities
 #
 #  id               :integer          not null, primary key
-#  transaction_type :string
-#  price            :integer          default(0)
-#  quantity         :integer          default(0)
 #  user_id          :integer
-#  meme_id          :integer
+#  provider_name    :string
+#  provider_side_id :string
+#  status           :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
 
 require 'rails_helper'
 
-RSpec.describe Transaction, type: :model do
+RSpec.describe ThirdPartyIdentity, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

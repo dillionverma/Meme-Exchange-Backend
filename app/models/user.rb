@@ -17,6 +17,7 @@
 #  updated_at             :datetime         not null
 #  coins                  :integer          default(1000)
 #  username               :string
+#  avatar                 :string
 #
 
 class User < ApplicationRecord
@@ -28,6 +29,7 @@ class User < ApplicationRecord
 
   has_many :transactions
   has_many :memes, through: :transactions
+  has_many :third_party_identities
 
   #VALID_USERNAME_REGEX = /\A[a-zA-Z0-9]+\z/
   #validates :username, presence: { message: 'username must be given please' },
