@@ -60,7 +60,7 @@ class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
       if existing_identity.present?
         existing_identity.user.update!(email: info[:email],
                                        avatar: info[:picture][:data][:url])
-        render json: { token: encoded_token(user_token: existing_identity.user.id), user: existing_identity.user }
+        render json: { token: encoded_token(user_id: existing_identity.user.id), user: existing_identity.user }
       else
         user = ::User.find_by(email: info[:email])
         new_identity = ThirdPartyIdentity.new(
@@ -76,7 +76,7 @@ class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
         end
         new_identity.update!(user_id: user.id)
         new_identity.save!
-        render json: { token: encoded_token(user_token: new_identity.user.id), user: user }
+        render json: { token: encoded_token(user_id: new_identity.user.id), user: user }
       end
     end
   rescue VerificationError
