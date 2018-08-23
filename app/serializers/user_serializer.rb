@@ -24,4 +24,5 @@ class UserSerializer < ActiveModel::Serializer
   attribute :email
   attribute :username
   attribute :coins
+  attribute :avatar
 end
