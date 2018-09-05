@@ -2,8 +2,8 @@
 #
 # Table name: third_party_identities
 #
-#  id               :integer          not null, primary key
-#  user_id          :integer
+#  id               :bigint(8)        not null, primary key
+#  user_id          :bigint(8)
 #  provider_name    :string
 #  provider_side_id :string
 #  status           :string

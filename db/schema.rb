@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20180713220825) do
     t.string "subreddit"
     t.string "author"
     t.text "url"
-    t.bigint "price"
     t.bigint "quantity", default: 0
     t.string "reddit_id"
     t.datetime "created_at", null: false

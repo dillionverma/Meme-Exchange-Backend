@@ -2,13 +2,12 @@
 #
 # Table name: memes
 #
-#  id         :integer          not null, primary key
+#  id         :bigint(8)        not null, primary key
 #  title      :string
 #  subreddit  :string
 #  author     :string
 #  url        :text
-#  price      :integer
-#  quantity   :integer          default(0)
+#  quantity   :bigint(8)        default(0)
 #  reddit_id  :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
