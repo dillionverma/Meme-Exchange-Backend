@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       namespace :user do
         # /api/v1/user
         get    '/',                 to: 'user#show'
+        # /api/v1/portfolio
+        get    'portfolio',         to: 'user#portfolio'
         # /api/v1/user/login
         post   'login',             to: 'sessions#login',             as: 'login'
         # /api/v1/user/third-party-login
