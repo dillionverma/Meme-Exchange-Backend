@@ -15,7 +15,7 @@
 
 class Meme < ApplicationRecord
   has_many :transactions
-  #has_many :meme_histories
+  has_many :meme_histories
   has_many :users, through: :transactions
 
   #validates :title,     presence: true
@@ -25,19 +25,32 @@ class Meme < ApplicationRecord
   #validates :quantity,  presence: true, numericality: { greater_than_or_equal_to: 0 }
 
 
-  scope :active, -> { where("quantity!='0'") }
+  scope :active, -> { where("memes.quantity!='0'") }
 
 
   def self.from_reddit(reddit_id)
     search_id = reddit_id
     search_id = "t3_#{reddit_id}" if !reddit_id.starts_with?('t3')
 
-    m = Reddit.from_ids(search_id).to_ary[0]
-    Meme.new(title:     m.title,
-             author:    m.author.name,
-             reddit_id: reddit_id,
-             subreddit: m.subreddit.title,
-             url:       m.permalink)
+    Meme.transaction do 
+      meme = Meme.new
+      m = Reddit.from_ids(search_id).to_ary[0]
+      meme.update!(title:     m.title,
+                   author:    m.author.name,
+                   reddit_id: reddit_id,
+                   subreddit: m.subreddit.title,
+                   url:       m.url,
+                   permalink: m.permalink)
+      MemeHistory.create!(reddit_id: reddit_id,
+                          price: m.score, 
+                          meme: meme, 
+                          date: Time.now)
+      meme
+    end
+  end
+
+  def price
+    meme_histories.last.price
   end
 
 end

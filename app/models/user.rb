@@ -42,4 +42,8 @@ class User < ApplicationRecord
     JWT.encode({ user_id: id }, Rails.application.secrets.secret_key_base, 'HS256', {})
   end
 
+
+  def portfolio
+    Meme.active.joins(:transactions).where("transactions.user_id=#{id}")
+  end
 end

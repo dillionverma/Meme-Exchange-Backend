@@ -1,2 +1,4 @@
 reddit_client_id: 'lMjvYFHlhKMtOQ'
 reddit_secret_key: '4kwlDUKbyWtLlbmpyrmxoYFUGbs'
+sidekiq_user: 'memesx'
+sidekiq_pass: 'memermans'

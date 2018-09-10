@@ -25,6 +25,8 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'responders'
 
 gem 'redd'
+gem 'sidekiq'
+gem 'sidekiq-cron'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

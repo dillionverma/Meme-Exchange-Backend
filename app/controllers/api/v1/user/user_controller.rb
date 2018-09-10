@@ -4,6 +4,6 @@ class Api::V1::User::UserController < Api::V1::AuthenticatedController
   end
 
   def portfolio
-    respond_with current_user.memes
+    respond_with current_user.portfolio
   end
 end

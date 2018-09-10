@@ -10,16 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180713220825) do
+ActiveRecord::Schema.define(version: 20180905182248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "meme_histories", force: :cascade do |t|
+    t.bigint "meme_id"
+    t.string "reddit_id"
+    t.bigint "price"
+    t.datetime "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meme_id"], name: "index_meme_histories_on_meme_id"
+  end
 
   create_table "memes", force: :cascade do |t|
     t.string "title"
     t.string "subreddit"
     t.string "author"
     t.text "url"
+    t.text "permalink"
     t.bigint "quantity", default: 0
     t.string "reddit_id"
     t.datetime "created_at", null: false
@@ -68,6 +79,7 @@ ActiveRecord::Schema.define(version: 20180713220825) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "meme_histories", "memes"
   add_foreign_key "third_party_identities", "users"
   add_foreign_key "transactions", "memes"
   add_foreign_key "transactions", "users"

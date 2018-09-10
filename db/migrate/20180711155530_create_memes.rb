@@ -5,6 +5,7 @@ class CreateMemes < ActiveRecord::Migration[5.1]
       t.string :subreddit
       t.string :author
       t.text :url
+      t.text :permalink
       t.bigint :quantity, default: 0
       t.string :reddit_id
 
