@@ -5,11 +5,19 @@ class Api::V1::Meme::MemesController < Api::V1::AuthenticatedController
     respond_with meme
   end
 
+  # {
+  #   quantity: 4
+  # }
+  #
   # /api/v1/meme/:id/buy
   def buy
     respond_with create_buy_transaction(params.fetch(:quantity))
   end
   
+  # {
+  #   quantity: 4
+  # }
+  #
   # /api/v1/meme/:id/sell
   def sell
     respond_with create_sell_transaction(params.fetch(:quantity))
