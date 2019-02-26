@@ -15,8 +15,8 @@ class Api::V1::AuthenticatedController < Api::BaseController
     render_error(
       status: :unauthorized,
       code: '401',
-      title: 'Login or signup to continue',
-      detail: 'Authorization token invalid'
+      title: 'Authorization token invalid',
+      detail: 'Login or signup to continue'
     )
   end
 

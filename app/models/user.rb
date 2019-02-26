@@ -37,13 +37,13 @@ class User < ApplicationRecord
                        #length: { minimum: 3, maximum: 20 },
                        #format: { without: VALID_USERNAME_REGEX, message: 'must contain only letters or numbers' }
 
+  def self.leaderboard
+    User.select(:id, :avatar, :username, :coins).order(coins: :desc)
+  end
+
   def jwt_token
     return unless Rails.env.development? || Rails.env.test?
     JWT.encode({ user_id: id }, Rails.application.secrets.secret_key_base, 'HS256', {})
   end
 
-
-  def portfolio
-    Meme.active.joins(:transactions).where("transactions.user_id=#{id}")
-  end
 end

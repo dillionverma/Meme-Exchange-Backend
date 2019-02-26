@@ -25,4 +25,5 @@ class UserSerializer < ActiveModel::Serializer
   attribute :username
   attribute :coins
   attribute :avatar
+  has_many :memes
 end

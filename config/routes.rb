@@ -5,9 +5,9 @@ Rails.application.routes.draw do
       # =========================
       namespace :user do
         # /api/v1/user
-        get    '/',                 to: 'user#show'
-        # /api/v1/portfolio
-        get    'portfolio',         to: 'user#portfolio'
+        get    '/',                 to: 'user#me'
+        # /api/v1/user/:username
+        get    '/:username',        to: 'user#show'
         # /api/v1/user/login
         post   'login',             to: 'sessions#login',             as: 'login'
         # /api/v1/user/third-party-login
@@ -18,7 +18,12 @@ Rails.application.routes.draw do
         post   'signup',            to: 'registrations#signup',       as: 'signup'
       end
 
-      # USER ROUTES
+      namespace :leaderboard do
+        # /api/v1/leaderboard
+        get    '/',       to: 'leaderboard#index'
+      end
+
+      # MEME ROUTES
       # =========================
       namespace :meme do
 
