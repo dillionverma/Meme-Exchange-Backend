@@ -23,4 +23,9 @@ class MemeSerializer < ActiveModel::Serializer
   attribute :reddit_id
   attribute :created_at
   attribute :updated_at
+  attribute :price
+
+  def price
+    self.object.price # uses meme history price
+  end
 end

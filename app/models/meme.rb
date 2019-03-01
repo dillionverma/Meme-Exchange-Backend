@@ -38,7 +38,7 @@ class Meme < ApplicationRecord
       meme.update!(title:     m.title,
                    author:    m.author.name,
                    reddit_id: reddit_id,
-                   subreddit: m.subreddit.title,
+                   subreddit: m.subreddit.display_name,
                    url:       m.url,
                    permalink: m.permalink)
       MemeHistory.create!(reddit_id: reddit_id,

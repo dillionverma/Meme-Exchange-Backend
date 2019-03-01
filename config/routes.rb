@@ -8,6 +8,8 @@ Rails.application.routes.draw do
         get    '/',                 to: 'user#me'
         # /api/v1/user/:username
         get    '/:username',        to: 'user#show'
+        # /api/v1/user/:username/transactions
+        get    '/:username/transactions',        to: 'user#transactions'
         # /api/v1/user/login
         post   'login',             to: 'sessions#login',             as: 'login'
         # /api/v1/user/third-party-login

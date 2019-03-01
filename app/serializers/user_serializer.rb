@@ -26,4 +26,8 @@ class UserSerializer < ActiveModel::Serializer
   attribute :coins
   attribute :avatar
   has_many :memes
+
+  def memes
+    self.object.memes.active.order(created_at: :desc)
+  end
 end

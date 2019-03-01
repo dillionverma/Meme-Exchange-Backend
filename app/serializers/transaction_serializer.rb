@@ -17,7 +17,7 @@ class TransactionSerializer < ActiveModel::Serializer
   attribute :transaction_type
   attribute :quantity
   attribute :price
-  has_one :user
+  #has_one :user
   has_one :meme
   attribute :created_at
   attribute :updated_at

@@ -2,9 +2,9 @@ class Api::V1::User::RegistrationsController < Api::V1::AuthenticatedController
   before_action :authenticate, except: :signup
 
   # {
+  #   username: 'username',
   #   email:    'email@email.com',
   #   password: 'pass',
-  #   token:    '343523raef'
   # }
   #
   # POST /api/v1/user/signup
@@ -13,7 +13,7 @@ class Api::V1::User::RegistrationsController < Api::V1::AuthenticatedController
     if user.valid?
       user.save!
       render status: :ok,
-        json: { token: encoded_token(user_id: user.id) }
+        json: { token: encoded_token(user_id: user.id), user: user }
     else
       render_validation_errors(user)
     end
@@ -22,6 +22,6 @@ class Api::V1::User::RegistrationsController < Api::V1::AuthenticatedController
   private
 
   def user_params
-    params.permit(:email, :password)
+    params.permit(:email, :password, :username)
   end
 end

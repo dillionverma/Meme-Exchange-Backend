@@ -46,6 +46,15 @@ module ErrorHandlerMixin
         exception: e
       )
     end
+
+    rescue_from Redd::InvalidAccess do |e|
+      render_exception_error(
+        status: :internal_server_error,
+        code: '500',
+        title: 'Internal Server Error',
+        exception: 'Internal Server Error'
+      )
+    end
   end
 
   protected
@@ -71,7 +80,7 @@ module ErrorHandlerMixin
     list_of_errors = []
     instance.errors.messages.each do |attr, errors|
       errors.each do |error|
-        list_of_errors.push(title: "#{attr} #{error}", detail: attr, code: '400')
+        list_of_errors.push(title: attr, detail: "#{attr.to_s.humanize} #{error}", code: '400')
       end
     end
     render status: '400', json: { errors: list_of_errors }
