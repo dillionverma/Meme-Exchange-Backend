@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180905182248) do
+ActiveRecord::Schema.define(version: 20190301063902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 20180905182248) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["meme_id"], name: "index_meme_histories_on_meme_id"
+  end
+
+  create_table "meme_portfolios", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "meme_id"
+    t.bigint "cost", default: 0
+    t.bigint "quantity", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meme_id"], name: "index_meme_portfolios_on_meme_id"
+    t.index ["user_id"], name: "index_meme_portfolios_on_user_id"
   end
 
   create_table "memes", force: :cascade do |t|
@@ -80,6 +91,8 @@ ActiveRecord::Schema.define(version: 20180905182248) do
   end
 
   add_foreign_key "meme_histories", "memes"
+  add_foreign_key "meme_portfolios", "memes"
+  add_foreign_key "meme_portfolios", "users"
   add_foreign_key "third_party_identities", "users"
   add_foreign_key "transactions", "memes"
   add_foreign_key "transactions", "users"

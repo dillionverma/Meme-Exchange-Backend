@@ -26,9 +26,11 @@ class Transaction < ApplicationRecord
 
   after_create :update_user_coins
   after_create :update_meme_quantity
+  after_create :update_meme_portfolio
 
   # At this point after validation, we are guaranteed we can update
   # balance without edge cases
+  
   def update_user_coins
     user.update!(coins: user.coins - quantity * price) if buy?
     user.update!(coins: user.coins + quantity * price) if sell?
@@ -37,6 +39,12 @@ class Transaction < ApplicationRecord
   def update_meme_quantity
     meme.update!(quantity: meme.quantity + quantity) if buy?
     meme.update!(quantity: meme.quantity - quantity) if sell?
+  end
+
+  def update_meme_portfolio
+    meme_portfolio = MemePortfolio.find_by(user: user, meme: meme)
+    meme_portfolio.update!(quantity: meme_portfolio.quantity + quantity, cost: meme_portfolio.cost + quantity * price) if buy?
+    meme_portfolio.update!(quantity: meme_portfolio.quantity - quantity, cost: meme_portfolio.cost - quantity * price) if sell?
   end
 
   def buy?

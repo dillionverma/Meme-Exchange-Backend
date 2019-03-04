@@ -26,6 +26,7 @@ class Api::V1::Meme::MemesController < Api::V1::AuthenticatedController
   private
 
   def create_buy_transaction(quantity)
+    MemePortfolio.find_or_create_by!(user: current_user, meme: meme)
     Transaction.create!(user: current_user, meme: meme, quantity: quantity, 
                         price: meme.price, transaction_type: 'buy')
   end
