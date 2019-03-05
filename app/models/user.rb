@@ -32,14 +32,20 @@ class User < ApplicationRecord
   has_many :third_party_identities
   has_many :meme_portfolios
 
-  #VALID_USERNAME_REGEX = /\A[a-zA-Z0-9]+\z/
-  #validates :username, presence: { message: 'username must be given please' },
-                       #uniqueness: { case_sensitive: false },
-                       #length: { minimum: 3, maximum: 20 },
-                       #format: { without: VALID_USERNAME_REGEX, message: 'must contain only letters or numbers' }
+  before_validation :generate_username
+
+  VALID_USERNAME_REGEX = /\A[a-zA-Z0-9]+\z/
+  validates :username, presence: { message: 'username must be given' },
+                       uniqueness: { case_sensitive: false },
+                       length: { minimum: 3, maximum: 20 },
+                       format: { with: VALID_USERNAME_REGEX, message: 'must contain only letters or numbers' }
 
   def self.leaderboard
     User.select(:id, :avatar, :username, :coins).order(coins: :desc)
+  end
+
+  def generate_username
+    self.username = "user#{((User.last&.id || 0) + 1)}" if self.username.nil?
   end
 
   def jwt_token
