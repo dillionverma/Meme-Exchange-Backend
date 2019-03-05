@@ -115,7 +115,9 @@ class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
           provider_name:    @provider_name,
           provider_side_id: @provider_side_id
         )
+        isNew = false
         if user.blank?
+          isNew = true # used to determine whether to show username dialog or not on frontend
           user = ::User.create!(
             email:    email,
             password: SecureRandom.hex(8),
@@ -124,7 +126,7 @@ class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
         end
         new_identity.update!(user_id: user.id)
         new_identity.save!
-        render json: { token: encoded_token(user_id: new_identity.user.id), user: user }
+        render json: { token: encoded_token(user_id: new_identity.user.id), user: user, new: isNew }
       end
     end
     rescue VerificationError
