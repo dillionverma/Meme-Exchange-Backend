@@ -27,6 +27,7 @@ gem 'responders'
 gem 'redd'
 gem 'sidekiq'
 gem 'sidekiq-cron'
+gem 'httparty'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

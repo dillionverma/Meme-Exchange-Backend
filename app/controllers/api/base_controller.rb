@@ -1,6 +1,6 @@
 class Api::BaseController < ApplicationController
   self.responder = Responders::ApiResponder
-  include ErrorHandlerMixin
+  include ErrorHandlerMixin, Errors
   respond_to :json
 
   protected
