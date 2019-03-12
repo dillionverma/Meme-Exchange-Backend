@@ -3,4 +3,3 @@
 meme_history:
   cron: "*/10 * * * *"                # once every 10 mins
   class: "MemeHistoryWorker"
-  queue: MemeHistory

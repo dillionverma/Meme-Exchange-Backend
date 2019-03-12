@@ -11,5 +11,5 @@ end
 
 
 Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
-  [user, password] == [ENV['sidekiq_user'], ENV['sidekiq_pass']]
+  [user, password] == ["admin", "memelordthegoose"]
 end
