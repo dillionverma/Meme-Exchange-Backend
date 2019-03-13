@@ -87,6 +87,16 @@ GEM
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capistrano-sidekiq (1.0.2)
+      capistrano (>= 3.9.0)
+      sidekiq (>= 3.4)
+    capistrano3-puma (3.1.1)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (~> 3.4)
     case_transform (0.2)
       activesupport
     choice (0.2.0)
@@ -361,7 +371,12 @@ DEPENDENCIES
   annotate
   better_errors
   byebug
+  capistrano
+  capistrano-bundler
   capistrano-rails
+  capistrano-rvm
+  capistrano-sidekiq
+  capistrano3-puma
   devise
   factory_bot
   faker!
