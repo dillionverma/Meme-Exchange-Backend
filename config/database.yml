@@ -20,6 +20,8 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+  pool: 5
 
 development:
   <<: *default
@@ -80,6 +82,6 @@ test:
 #
 production:
   <<: *default
-  database: memesx-backend_production
-  username: memesx-backend
-  password: <%= ENV['memesx-backend_DATABASE_PASSWORD'] %>
+  database: meme_exchange_production
+  username: rails
+  password: <%= ENV['RAILS_POSTGRES_PASS'] %>
