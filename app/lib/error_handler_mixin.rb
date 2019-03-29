@@ -48,15 +48,9 @@ module ErrorHandlerMixin
     end
 
     rescue_from Redd::InvalidAccess do |e|
-      render_error(
-        status: :internal_server_error,
-        code: '500',
-        title: 'Internal Server Error',
-        detail: 'Internal Server Error'
+      logger.info(
+        "Returning error response for exception: #{e.class.name}: #{e.message}"
       )
-    end
-
-    rescue_from Exception do |e|
       render_error(
         status: :internal_server_error,
         code: '500',
@@ -69,7 +63,7 @@ module ErrorHandlerMixin
   protected
 
   def render_exception_error(status:, code:, title:, exception:)
-    Rails.logger.info(
+    logger.info(
       "Returning error response for exception: #{exception.class.name}: #{exception.message}"
     )
     render_error(status: status, code: code, title: title, detail: exception.message)

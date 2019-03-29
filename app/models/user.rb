@@ -34,7 +34,7 @@ class User < ApplicationRecord
 
   before_validation :generate_username
 
-  VALID_USERNAME_REGEX = /\A[a-zA-Z0-9-_]+\z/
+  VALID_USERNAME_REGEX = /\A[a-zA-Z0-9\-_]+\z/
   validates :username, presence: { message: 'username must be given' },
                        uniqueness: { case_sensitive: false },
                        length: { minimum: 3, maximum: 20 },

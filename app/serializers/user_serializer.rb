@@ -21,6 +21,7 @@
 #
 
 class UserSerializer < ActiveModel::Serializer
+  attribute :id
   attribute :email
   attribute :username
   attribute :coins
