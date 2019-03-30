@@ -41,6 +41,8 @@ Rails.application.routes.draw do
         post  '/:id/buy',                to: 'memes#buy'
         # /api/v1/meme/:id/sell
         post  '/:id/sell',               to: 'memes#sell'
+        # /api/v1/meme/:id/sell
+        get  '/:id/sell',               to: 'memes#sell_info'
 
       end
     end

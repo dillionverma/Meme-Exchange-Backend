@@ -1,6 +1,6 @@
 class Api::V1::Meme::MemesController < Api::V1::AuthenticatedController
 
-  # /api/v1/meme/:id
+  # GET /api/v1/meme/:id
   def show
     respond_with meme
   end
@@ -9,7 +9,7 @@ class Api::V1::Meme::MemesController < Api::V1::AuthenticatedController
   #   quantity: 4
   # }
   #
-  # /api/v1/meme/:id/buy
+  # POST /api/v1/meme/:id/buy
   def buy
     respond_with create_buy_transaction(params.fetch(:quantity))
   end
@@ -18,9 +18,15 @@ class Api::V1::Meme::MemesController < Api::V1::AuthenticatedController
   #   quantity: 4
   # }
   #
-  # /api/v1/meme/:id/sell
+  # POST /api/v1/meme/:id/sell
   def sell
     respond_with create_sell_transaction(params.fetch(:quantity))
+  end
+
+  
+  # GET /api/v1/meme/:id/sell
+  def sell_info
+    respond_with price: meme.price
   end
 
   private
