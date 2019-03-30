@@ -34,7 +34,7 @@ class Meme < ApplicationRecord
 
     Meme.transaction do 
       meme = Meme.new
-      m = Rails.application.config.Reddit.from_ids(search_id).to_ary[0]
+      m = Reddit.get.from_ids(search_id).to_ary[0]
       meme.update!(title:     m.title,
                    author:    m.author.name,
                    reddit_id: reddit_id,

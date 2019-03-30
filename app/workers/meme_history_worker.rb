@@ -7,7 +7,7 @@ class MemeHistoryWorker
     ActiveRecord::Base.transaction do
       memes.each_slice(1000) do |data|
         values = data.map do |meme|
-          price = Rails.application.config.Reddit.from_ids('t3_' + meme[:reddit_id]).to_ary[0].score
+          price = Reddit.get.from_ids('t3_' + meme[:reddit_id]).to_ary[0].score
           "(#{meme[:id]},'#{meme[:reddit_id]}',#{price},'#{Time.now.to_s}','#{Time.now.to_s}','#{Time.now.to_s}')"
         end.join(",")
 
