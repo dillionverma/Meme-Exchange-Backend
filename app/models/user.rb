@@ -52,5 +52,26 @@ class User < ApplicationRecord
     return unless Rails.env.development? || Rails.env.test?
     JWT.encode({ user_id: id }, Rails.application.secrets.secret_key_base, 'HS256', {})
   end
+  
+  # DANGER ZONE
+  def reset
+    ActiveRecord::Base.transaction do
+      self.meme_portfolios.each do |portfolio|
+
+        # Subtract quantity from global meme supply
+        portfolio.meme.update(quantity: portfolio.meme.quantity - portfolio.quantity)
+
+        # Delete the record
+        portfolio.destroy
+      end
+
+      # Delete all transactions
+      self.transactions.destroy_all
+
+      # Reset coins
+      self.coins = 1000
+    end
+
+  end
 
 end
