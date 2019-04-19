@@ -69,7 +69,7 @@ class User < ApplicationRecord
       self.transactions.destroy_all
 
       # Reset coins
-      self.coins = 1000
+      update!(coins: 1000)
     end
 
   end
