@@ -1,6 +1,7 @@
 class Api::V1::User::UserController < Api::V1::AuthenticatedController
- before_action :authenticate, only: [:me, :update_username]
+ before_action :authenticate, only: [:me, :update_username, :reset_user]
 
+  # GET /api/v1/user
   def show
     user = ::User.find_by(username: params[:username])
     if user.nil?
@@ -22,6 +23,12 @@ class Api::V1::User::UserController < Api::V1::AuthenticatedController
   # PUT /api/v1/user/username
   def update_username
     current_user.update!(username: params[:username])
+    render status: :ok, json: { user: current_user }
+  end
+
+  # POST /api/v1/user/reset
+  def reset_user
+    current_user.reset
     render status: :ok, json: { user: current_user }
   end
 

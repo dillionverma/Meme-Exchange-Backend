@@ -14,6 +14,8 @@ Rails.application.routes.draw do
         get    '/:username',        to: 'user#show'
         # /api/v1/user/username
         put    '/username',         to: 'user#update_username'
+        # /api/v1/user/reset
+        post   '/reset',            to: 'user#reset_user'
         # /api/v1/user/:username/transactions
         get    '/:username/transactions',        to: 'user#transactions'
         # /api/v1/user/login
