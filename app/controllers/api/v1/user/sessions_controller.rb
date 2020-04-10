@@ -10,7 +10,7 @@ class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
   #
   # POST /api/v1/user/login
   def login
-    user = ::User.find_by(email: @email)
+    user = ::User.find_for_authentication(email: @email)
     if user.nil?
       render_error(
         status: :unauthorized,
