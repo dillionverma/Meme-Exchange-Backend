@@ -1,5 +1,5 @@
 
 #       * * * * *  --->  min(0-59)  hr(0-23)  day(1-31)  month(1-12)  weekday(1-7)
 meme_history:
-  cron: "*/10 * * * *"                # once every 10 mins
+  cron: "*/2 * * * *"                # once every 2 mins
   class: "MemeHistoryWorker"
