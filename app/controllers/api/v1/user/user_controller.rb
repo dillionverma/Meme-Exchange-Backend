@@ -47,6 +47,7 @@ class Api::V1::User::UserController < Api::V1::AuthenticatedController
 
   # DELETE /api/v1/user
   def delete
+    current_user.reset
     current_user.delete
     render status: :no_content
   end
