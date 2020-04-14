@@ -22,7 +22,7 @@ class Api::V1::AuthenticatedController < Api::BaseController
 
   def set_current_user(id)
     user = ::User.find(id)
-    if user.active
+    if user.active?
       @current_user = user
     else
       render_error(
