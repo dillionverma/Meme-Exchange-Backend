@@ -30,10 +30,10 @@ gem 'sidekiq-cron'
 gem 'httparty'
 
 group :development, :test do
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  # gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot'
   gem 'faker', git: 'https://github.com/stympy/faker.git', branch: 'master'
-  gem 'pry-byebug'
+  # gem 'pry-byebug'
   gem 'pry-rails'
   gem 'pry-stack_explorer'
   gem 'rspec-rails'
@@ -49,6 +49,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
+  gem 'rb-readline'
 
   gem 'capistrano',         require: false
   gem 'capistrano-rvm',     require: false

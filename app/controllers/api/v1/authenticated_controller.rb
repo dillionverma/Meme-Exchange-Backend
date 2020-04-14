@@ -21,6 +21,16 @@ class Api::V1::AuthenticatedController < Api::BaseController
   end
 
   def set_current_user(id)
-    @current_user = ::User.find(id)
+    user = ::User.find(id)
+    if user.active?
+      @current_user = user
+    else
+      render_error(
+        status: :not_found,
+        code: '404',
+        title: 'User not found',
+        detail: 'Login or signup to continue'
+      )
+    end
   end
 end
