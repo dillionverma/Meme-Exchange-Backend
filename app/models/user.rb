@@ -41,7 +41,7 @@ class User < ApplicationRecord
                        format: { with: VALID_USERNAME_REGEX, message: 'must contain only letters, numbers, underscores or dashes' }
 
   def self.leaderboard
-    User.select(:id, :avatar, :username, :coins).order(coins: :desc)
+    User.select(:id, :avatar, :username, :coins).order(coins: :desc).where(active: true)
   end
 
   def generate_username

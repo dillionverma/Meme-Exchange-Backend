@@ -11,12 +11,17 @@ class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
   # POST /api/v1/user/login
   def login
     user = ::User.find_for_authentication(email: @email)
+
+    # Automatically reactivate accounts which attempt to login
+    reactivate_account(user)
+
+    # Authenticate
     if user.nil?
       render_error(
         status: :unauthorized,
         code: '401',
         title: "User with email #{@email} not found.",
-        detail: 'email'
+        detail: "User with email #{@email} not found."
       )
     elsif user.valid_password?(@password)
       render status: :ok,
@@ -105,6 +110,9 @@ class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
       provider_side_id: @provider_side_id
     )
 
+    # Automatically reactivate accounts which attempt to login
+    reactivate_account(existing_identity.user)
+
     ThirdPartyIdentity.transaction do
       if existing_identity.present?
         # existing_identity.user.update!(email: email, avatar: avatar)
@@ -136,5 +144,12 @@ class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
         title: 'Verification Error',
         detail: "#{@provider_name.humanize} verification failed"
       )
+    end
+
+    def reactivate_account(user)
+      # Automatically reactivate accounts which attempt to login
+      unless user.active?
+        user.update!(active: true) 
+      end
     end
 end

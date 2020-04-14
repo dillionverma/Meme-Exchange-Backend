@@ -26,6 +26,12 @@ Rails.application.routes.draw do
         delete 'logout',            to: 'sessions#logout',            as: 'logout'
         # /api/v1/user/signup
         post   'signup',            to: 'registrations#signup',       as: 'signup'
+        # /api/v1/user/deactivate
+        put '/deactivate',          to: 'user#deactivate'
+        # /api/v1/user/reactivate
+        put '/reactivate',          to: 'user#reactivate'
+        # /api/v1/user
+        delete '/',                 to: 'user#delete'
       end
 
       namespace :leaderboard do

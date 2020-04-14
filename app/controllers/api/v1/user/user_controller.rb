@@ -1,5 +1,5 @@
 class Api::V1::User::UserController < Api::V1::AuthenticatedController
- before_action :authenticate, only: [:me, :update_username, :reset_user]
+ before_action :authenticate, only: [:me, :update_username, :reset_user, :delete, :deactivate]
 
   # GET /api/v1/user
   def show
@@ -24,6 +24,31 @@ class Api::V1::User::UserController < Api::V1::AuthenticatedController
   def update_username
     current_user.update!(username: params[:username])
     render status: :ok, json: { user: current_user }
+  end
+
+  # PUT /api/v1/user/reactivate
+  def reactivate
+    # TODO: Send verification email to ensure that appropiate account is being reactivated
+    # current_user.update!(active: true)
+    # render status: :ok, json: { user: current_user }
+    render_error(
+      status: :not_implemented,
+      code: '501',
+      title: 'Not Implemented',
+      detail: "This feature has not been implemented yet. Please contact support."
+    )
+  end
+
+  # PUT /api/v1/user/deactivate
+  def deactivate
+    current_user.update!(active: false)
+    render status: :ok, json: { user: current_user }
+  end
+
+  # DELETE /api/v1/user
+  def delete
+    current_user.delete
+    render status: :no_content
   end
 
   # POST /api/v1/user/reset

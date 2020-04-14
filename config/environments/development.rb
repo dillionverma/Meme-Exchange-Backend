@@ -45,5 +45,5 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   
-  config.hosts << "api.lvh.me" # Whitelist development hostname
+  # config.hosts << "api.lvh.me" # Whitelist development hostname
 end
