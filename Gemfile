@@ -50,6 +50,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
   gem 'rb-readline'
+  gem "rails-erd"
 
   gem 'capistrano',         require: false
   gem 'capistrano-rvm',     require: false

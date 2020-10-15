@@ -32,6 +32,7 @@ class UserSerializer < ActiveModel::Serializer
 
   def initialize(*args)
     super
+    # TODO: FIX ASAP
     # https://stackoverflow.com/questions/9796078/selecting-rows-ordered-by-some-column-and-distinct-on-another
     # https://dev.mysql.com/doc/refman/5.6/en/example-maximum-column-group-row.html
     @portfolio ||= self.object.meme_portfolios.joins("

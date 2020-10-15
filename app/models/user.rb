@@ -41,6 +41,9 @@ class User < ApplicationRecord
                        format: { with: VALID_USERNAME_REGEX, message: 'must contain only letters, numbers, underscores or dashes' }
 
   def self.leaderboard
+    # TODO: MOVE THIS TO A REDIS IN-MEMORY IMPLEMENTATION - USE SORTED-SETS (ZSETS)
+    # https://redislabs.com/solutions/use-cases/leaderboards/
+    # https://www.ionos.com/community/hosting/redis/how-to-implement-a-simple-redis-leaderboard/
     User.select(:id, :avatar, :username, :coins).order(coins: :desc).where(active: true)
   end
 

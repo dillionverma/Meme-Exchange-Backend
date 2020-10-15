@@ -110,8 +110,10 @@ class Api::V1::User::SessionsController < Api::V1::AuthenticatedController
       provider_side_id: @provider_side_id
     )
 
-    # Automatically reactivate accounts which attempt to login
-    reactivate_account(existing_identity.user)
+    if existing_identity.present?
+      # Automatically reactivate accounts which attempt to login
+      reactivate_account(existing_identity.user)
+    end
 
     ThirdPartyIdentity.transaction do
       if existing_identity.present?
