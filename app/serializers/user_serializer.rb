@@ -22,12 +22,12 @@
 
 class UserSerializer < ActiveModel::Serializer
   attribute :id
-  attribute :email
+  # attribute :email
   attribute :username
   attribute :coins
   attribute :avatar
   has_many :portfolio
-  has_many :portfolio_history
+  # has_many :portfolio_history
   
 
   def initialize(*args)
